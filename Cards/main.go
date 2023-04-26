@@ -2,11 +2,18 @@
 
 package main
 
+import "fmt"
+
 func main() {
+	/* 	cards := newDeck()
+
+	   	mano, restoMazo := deal(cards, 5)
+
+	   	mano.print()
+	   	restoMazo.print()
+
+	*/
 	cards := newDeck()
 
-	mano, restoMazo := deal(cards, 5)
-
-	mano.print()
-	restoMazo.print()
+	fmt.Println(cards.deckToString())
 }
