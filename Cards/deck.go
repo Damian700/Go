@@ -8,6 +8,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"strings"
 )
 
@@ -37,4 +38,9 @@ func deal(d deck, hand int) (deck, deck) {
 
 func (d deck) deckToString() string {
 	return strings.Join([]string(d), ",")
+}
+
+func (d deck) saveToFile(filename string) error {
+	// func WriteFile(filename string, data []byte, perm fs.FileMode) error
+	return ioutil.WriteFile(filename, []byte(d.deckToString()), 0666)
 }
