@@ -1,6 +1,5 @@
 /* You'll find bellow the code that describes what a deck is and
 how it works
-
 New type of 'Deck' which is a slice of strings
 */
 
@@ -9,6 +8,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -43,4 +43,15 @@ func (d deck) deckToString() string {
 func (d deck) saveToFile(filename string) error {
 	// func WriteFile(filename string, data []byte, perm fs.FileMode) error
 	return ioutil.WriteFile(filename, []byte(d.deckToString()), 0666)
+}
+
+func newDeckFromFile(filename string) deck {
+	bs, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
+	}
+	ss := strings.Split(string(bs), ",")
+	// func Split(s, sep string) []string
+	return deck(ss)
 }
