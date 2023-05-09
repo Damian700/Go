@@ -30,12 +30,16 @@ func main() {
 		},
 	}
 	fmt.Printf("%+v", juan)
-	pioPointer := &pio
-	// & ---> ampersand says, give the memory adress
-	// this variable is pointing at
 
-	pioPointer.updateName("Saint Pio")
+	/* 	pioPointer := &pio
+	   	pioPointer.updateName("Saint Pio")
+	   	pio.print() */
+	pio.updateName("Saint Pio")
 	pio.print()
+}
+
+func (pointerToPerson *person) updateName(newName string) {
+	(*pointerToPerson).firstName = newName
 }
 
 func (p person) print() {
@@ -45,16 +49,3 @@ func (p person) print() {
 		p.contactInfo.zipCode,
 	)
 }
-
-func (pointerToPerson *person) updateName(newName string) {
-	(*pointerToPerson).firstName = newName
-}
-
-//*person ---> is indicating that this function is receiveing
-//in te receiver, a type pointer that points at a person.
-// * ---> star pointer when not aside a type,
-// gives me the actual value of the memory position it indicate
-/*
-turn adress into value with *address
-turn value into address with &value
-*/
