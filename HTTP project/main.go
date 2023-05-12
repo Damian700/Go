@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+type myWriter struct{}
+
 func main() {
 	resp, err := http.Get("http://google.com")
 	if err != nil {
@@ -17,5 +19,15 @@ func main() {
 	   	resp.Body.Read(bs)
 	   	fmt.Println(string(bs)) */
 
-	io.Copy(os.Stdout, resp.Body)
+	lw := myWriter{}
+
+	io.Copy(lw, resp.Body) //first argument, has to be something that implements the writer interface. (File type, which has a function caled Write ([]byte) (int, err))
+	//second argument, something that implements the reader interface
+
+}
+
+func (myWriter) Write(bs []byte) (int, error) {
+	fmt.Println(string(bs))
+	fmt.Println("Just wrote this many bytes:", len(bs))
+	return len(bs), nil
 }
